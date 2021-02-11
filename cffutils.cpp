@@ -13,7 +13,7 @@ bool CFFUtils::CheckAndAdvanceBitflag(ulong & bitFlag)
     return flagIsSet;
 }
 
-QString CFFUtils::ReadStringFromBinaryReader(QFile * cff)
+QString CFFUtils::ReadString(QFile * cff)
 {
     // read out a string, stopping at the first null terminator
     QByteArray writer;
@@ -36,7 +36,7 @@ QString CFFUtils::ReadStringFromBinaryReader(QFile * cff)
     return QString(writer);
 }
 
-QString CFFUtils::ReadBitflagStringWithReader(ulong & bitFlags, QFile * cff, long virtualBase)
+QString CFFUtils::ReadBitflagString(ulong & bitFlags, QFile * cff, long virtualBase)
 {
     if (CheckAndAdvanceBitflag(bitFlags))
     {
@@ -48,7 +48,7 @@ QString CFFUtils::ReadBitflagStringWithReader(ulong & bitFlags, QFile * cff, lon
         // seek to the specified offset, then read out the string
         cff->seek(stringOffset + virtualBase);
 
-        auto result = CFFUtils::ReadStringFromBinaryReader(cff);
+        auto result = CFFUtils::ReadString(cff);
         // restore our reading cursor
         cff->seek(readerPosition);
         return result;
@@ -59,3 +59,5 @@ QString CFFUtils::ReadBitflagStringWithReader(ulong & bitFlags, QFile * cff, lon
         return "(flag disabled)";
     }
 }
+
+

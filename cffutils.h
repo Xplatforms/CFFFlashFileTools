@@ -6,6 +6,7 @@
 
 
 #define ReadBitflag4Byte(o,b,f) 0;{if(CFFUtils::CheckAndAdvanceBitflag(b))f->read((char*)&o, 4);}
+#define ReadBitflag2Byte(o,b,f) 0;{if(CFFUtils::CheckAndAdvanceBitflag(b))f->read((char*)&o, 2);}
 #define ReadBitflag1Byte(o,b,f) 0;{if(CFFUtils::CheckAndAdvanceBitflag(b))f->read((char*)&o, 1);}
 
 
@@ -16,8 +17,8 @@ public:
     explicit CFFUtils(QObject *parent = nullptr);
 
     static bool CheckAndAdvanceBitflag(ulong & bitFlag);
-    static QString ReadStringFromBinaryReader(QFile * cff);
-    static QString ReadBitflagStringWithReader(ulong & bitFlags, QFile * cff, long virtualBase = 0);
+    static QString ReadString(QFile * cff);
+    static QString ReadBitflagString(ulong & bitFlags, QFile * cff, long virtualBase = 0);
 
 signals:
 

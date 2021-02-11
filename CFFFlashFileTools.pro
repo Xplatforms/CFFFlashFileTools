@@ -15,7 +15,10 @@ SOURCES += \
         cffflashdatablock.cpp \
         cffflashdescriptionheader.cpp \
         cffflashheader.cpp \
+        cffflashsegment.cpp \
         cffutils.cpp \
+        ctfheader.cpp \
+        ctflanguage.cpp \
         main.cpp
 
 RESOURCES += qml.qrc
@@ -39,5 +42,8 @@ HEADERS += \
     cffflashdatablock.h \
     cffflashdescriptionheader.h \
     cffflashheader.h \
+    cffflashsegment.h \
     cffutils.h \
+    ctfheader.h \
+    ctflanguage.h \
     defs.h
