@@ -15,6 +15,7 @@ CFFFlashDataBlock * CFFFlashDataBlock::readFlashDataBlock(QFile * cff, long base
 
 void CFFFlashDataBlock::readCFFData(QFile * cff, long baseAddress)
 {
+<<<<<<< HEAD
     this->setBaseAddress(baseAddress);
     cff->seek(baseAddress);
 
@@ -103,3 +104,7 @@ void CFFFlashDataBlock::readCFFData(QFile * cff, long baseAddress)
 }
 
 
+=======
+
+}
+>>>>>>> 6a3ae424ef77d14426213ab2a293862fd3d7a961

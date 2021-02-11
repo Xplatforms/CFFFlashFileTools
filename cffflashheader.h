@@ -24,7 +24,11 @@
         public int FlashDescriptionTable;
         public int DataBlockTableCountProbably;
         public int DataBlockRefTable;
+<<<<<<< HEAD
         public int ;
+=======
+        public int CTFHeaderTable;
+>>>>>>> 6a3ae424ef77d14426213ab2a293862fd3d7a961
         public int LanguageBlockLength;
         public int NumberOfECURefs;
         public int ECURefTable;
@@ -44,6 +48,7 @@ class CFFFlashHeader : public QObject
 public:
     static CFFFlashHeader * readFlashHeader(QFile * cff, QObject * parent = Q_NULLPTR);
 
+<<<<<<< HEAD
     Q_PROPERTY(int32_t CTFHeaderTable READ CTFHeaderTable NOTIFY CTFHeaderTableChanged);
     Q_PROPERTY(int32_t CffHeaderSize READ CffHeaderSize NOTIFY CffHeaderSizeChanged);
     Q_PROPERTY(long BaseAddress READ BaseAddress);
@@ -52,10 +57,13 @@ public:
     int32_t CffHeaderSize(){return this->m_CffHeaderSize;}
     long BaseAddress(){return this->m_BaseAddress;}
 
+=======
+>>>>>>> 6a3ae424ef77d14426213ab2a293862fd3d7a961
 private:
     explicit CFFFlashHeader(QObject *parent = nullptr);
     void readFlash();
 
+<<<<<<< HEAD
 signals:
     void CTFHeaderTableChanged();
     void CffHeaderSizeChanged();
@@ -67,6 +75,11 @@ private:
     int32_t m_CffHeaderSize;
     long m_BaseAddress;
 
+=======
+
+private:
+    QFile * m_cff_file;
+>>>>>>> 6a3ae424ef77d14426213ab2a293862fd3d7a961
     QList<CFFFlashDescriptionHeader *>  m_desc_headers;
     QList<CFFFlashDataBlock *>          m_flash_data_blocks;
 };
