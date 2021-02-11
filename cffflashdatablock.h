@@ -1,159 +1,12 @@
 #ifndef CFFFLASHDATABLOCK_H
 #define CFFFLASHDATABLOCK_H
 
-/*
-<<<<<<< HEAD
-=======
-public class FlashDataBlock
-    {
-
-        // 0x16 [6,  4,4,4,4,  4,4,4,4,  4,4,4,2,  4,4,4,4,  4,4,4,4,  4,4,4,4,4],
-        public string Qualifier;
-        public int LongName;
-        public int Description;
-        public int FlashData;
-        public int BlockLength;
-        public int DataFormat;
-        public int FileName;
-        public int NumberOfFilters;
-        public int FiltersOffset;
-        public int NumberOfSegments;
-        public int SegmentOffset;
-        public int EncryptionMode;
-        public int KeyLength;
-        public int KeyBuffer;
-        public int NumberOfOwnIdents;
-        public int IdentsOffset;
-        public int NumberOfSecurities;
-        public int SecuritiesOffset;
-        public string DataBlockType;
-        public int UniqueObjectId;
-        public string FlashDataInfo_Idk;
-        public int FlashDataInfoLang1;
-        public int FlashDataInfoLang2;
-        public int FlashDataInfo_Idk2;
-
-        public long BaseAddress;
-        public List<FlashSegment> FlashSegments = new List<FlashSegment>();
-
-        public FlashDataBlock(BinaryReader reader, long baseAddress)
-        {
-            BaseAddress = baseAddress;
-            reader.BaseStream.Seek(BaseAddress, SeekOrigin.Begin);
-
-            ulong bitflags = reader.ReadUInt32();
-            reader.ReadUInt16();
-
-            Qualifier = CaesarReader.ReadBitflagStringWithReader(ref bitflags, reader, BaseAddress);
-            LongName = CaesarReader.ReadBitflagInt32(ref bitflags, reader);
-            Description = CaesarReader.ReadBitflagInt32(ref bitflags, reader);
-            FlashData = CaesarReader.ReadBitflagInt32(ref bitflags, reader);
-
-            BlockLength = CaesarReader.ReadBitflagInt32(ref bitflags, reader);
-            DataFormat = CaesarReader.ReadBitflagInt32(ref bitflags, reader);
-            FileName = CaesarReader.ReadBitflagInt32(ref bitflags, reader);
-            NumberOfFilters = CaesarReader.ReadBitflagInt32(ref bitflags, reader);
-
-            FiltersOffset = CaesarReader.ReadBitflagInt32(ref bitflags, reader);
-            NumberOfSegments = CaesarReader.ReadBitflagInt32(ref bitflags, reader);
-            SegmentOffset = CaesarReader.ReadBitflagInt32(ref bitflags, reader);
-            EncryptionMode = CaesarReader.ReadBitflagInt16(ref bitflags, reader);
-
-            KeyLength = CaesarReader.ReadBitflagInt32(ref bitflags, reader);
-            KeyBuffer = CaesarReader.ReadBitflagInt32(ref bitflags, reader);
-            NumberOfOwnIdents = CaesarReader.ReadBitflagInt32(ref bitflags, reader);
-            IdentsOffset = CaesarReader.ReadBitflagInt32(ref bitflags, reader);
-
-            NumberOfSecurities = CaesarReader.ReadBitflagInt32(ref bitflags, reader);
-            SecuritiesOffset = CaesarReader.ReadBitflagInt32(ref bitflags, reader);
-            DataBlockType = CaesarReader.ReadBitflagStringWithReader(ref bitflags, reader, BaseAddress);
-            UniqueObjectId = CaesarReader.ReadBitflagInt32(ref bitflags, reader);
-
-            FlashDataInfo_Idk = CaesarReader.ReadBitflagStringWithReader(ref bitflags, reader, BaseAddress);
-            FlashDataInfoLang1 = CaesarReader.ReadBitflagInt32(ref bitflags, reader);
-            FlashDataInfoLang2 = CaesarReader.ReadBitflagInt32(ref bitflags, reader);
-            FlashDataInfo_Idk2 = CaesarReader.ReadBitflagInt32(ref bitflags, reader);
-
-
-            // CtfUnk1 = CaesarReader.ReadBitflagInt32(ref ctfBitflags, reader);
-            FlashSegments = new List<FlashSegment>();
-            for (int segmentIndex = 0; segmentIndex < NumberOfSegments; segmentIndex++)
-            {
-                long segmentEntryAddress = SegmentOffset + BaseAddress + (segmentIndex * 4);
-                reader.BaseStream.Seek(segmentEntryAddress, SeekOrigin.Begin);
-
-                long segmentBaseAddress = SegmentOffset + BaseAddress + reader.ReadInt32();
-
-                FlashSegment segment = new FlashSegment(reader, segmentBaseAddress);
-                FlashSegments.Add(segment);
-            }
-
-        }
->>>>>>> 6a3ae424ef77d14426213ab2a293862fd3d7a961
-
-
-        public long GetBlockLengthOffset(BinaryReader reader)
-        {
-            reader.BaseStream.Seek(BaseAddress, SeekOrigin.Begin);
-
-            ulong bitflags = reader.ReadUInt32();
-            reader.ReadUInt16();
-
-<<<<<<< HEAD
-            CaesarReader.ReadBitflagString(ref bitflags, reader, BaseAddress); // Qualifier
-=======
-            CaesarReader.ReadBitflagStringWithReader(ref bitflags, reader, BaseAddress); // Qualifier
->>>>>>> 6a3ae424ef77d14426213ab2a293862fd3d7a961
-            CaesarReader.ReadBitflagInt32(ref bitflags, reader); // LongName
-            CaesarReader.ReadBitflagInt32(ref bitflags, reader); // Description
-            CaesarReader.ReadBitflagInt32(ref bitflags, reader); // FlashData
-
-            if (CaesarReader.CheckAndAdvanceBitflag(ref bitflags))
-            {
-                return reader.BaseStream.Position;
-            }
-            else
-            {
-                return -1;
-            }
-        }
-<<<<<<< HEAD
-
-=======
->>>>>>> 6a3ae424ef77d14426213ab2a293862fd3d7a961
-        public long GetFlashDataOffset(BinaryReader reader)
-        {
-            reader.BaseStream.Seek(BaseAddress, SeekOrigin.Begin);
-
-            ulong bitflags = reader.ReadUInt32();
-            reader.ReadUInt16();
-
-<<<<<<< HEAD
-            CaesarReader.ReadBitflagString(ref bitflags, reader, BaseAddress); // Qualifier
-=======
-            CaesarReader.ReadBitflagStringWithReader(ref bitflags, reader, BaseAddress); // Qualifier
->>>>>>> 6a3ae424ef77d14426213ab2a293862fd3d7a961
-            CaesarReader.ReadBitflagInt32(ref bitflags, reader); // LongName
-            CaesarReader.ReadBitflagInt32(ref bitflags, reader); // Description
-
-            if (CaesarReader.CheckAndAdvanceBitflag(ref bitflags))
-            {
-                return reader.BaseStream.Position;
-            }
-            else
-            {
-                return -1;
-            }
-        }
-*/
 
 #include <QObject>
 #include <QFile>
-<<<<<<< HEAD
+
 #include <QList>
 #include "cffflashsegment.h"
-=======
->>>>>>> 6a3ae424ef77d14426213ab2a293862fd3d7a961
 
 class CFFFlashDataBlock : public QObject
 {
@@ -162,7 +15,6 @@ public:
     explicit CFFFlashDataBlock(QObject *parent = nullptr);
     static CFFFlashDataBlock * readFlashDataBlock(QFile * cff, long baseAddress, QObject * parent = Q_NULLPTR);
 
-<<<<<<< HEAD
     Q_PROPERTY(QString Qualifier READ Qualifier WRITE setQualifier NOTIFY QualifierChanged);
     Q_PROPERTY(QString DataBlockType READ DataBlockType WRITE setDataBlockType NOTIFY DataBlockTypeChanged);
     Q_PROPERTY(QString FlashDataInfo_Idk READ FlashDataInfo_Idk WRITE setFlashDataInfo_Idk NOTIFY FlashDataInfo_IdkChanged);
@@ -302,11 +154,7 @@ private:
     int32_t m_FlashDataInfo_Idk2;
     QList<CFFFlashSegment *> m_FlashSegments;
     long    m_BaseAddress;
-=======
-private:
-    void readCFFData(QFile * cff, long baseAddress);
 
->>>>>>> 6a3ae424ef77d14426213ab2a293862fd3d7a961
 };
 
 #endif // CFFFLASHDATABLOCK_H

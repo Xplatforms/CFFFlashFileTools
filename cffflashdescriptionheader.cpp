@@ -23,11 +23,7 @@ void CFFFlashDescriptionHeader::readCFFData(QFile * cff, long baseAddress)
     ulong flashBitFlags = 0;
     cff->read((char*)&flashBitFlags, 4);
 
-<<<<<<< HEAD
     this->setQualifier(CFFUtils::ReadBitflagString(flashBitFlags, cff, baseAddress));
-=======
-    this->setQualifier(CFFUtils::ReadBitflagStringWithReader(flashBitFlags, cff, baseAddress));
->>>>>>> 6a3ae424ef77d14426213ab2a293862fd3d7a961
     int32_t Description = ReadBitflag4Byte(Description, flashBitFlags, cff);
     this->setDescription(Description);
     int32_t FlashAreaName = ReadBitflag4Byte(FlashAreaName, flashBitFlags, cff);

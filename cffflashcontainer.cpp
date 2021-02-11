@@ -1,11 +1,7 @@
 #include "defs.h"
 #include "cffflashcontainer.h"
 #include "cffflashheader.h"
-<<<<<<< HEAD
 #include "ctfheader.h"
-=======
->>>>>>> 6a3ae424ef77d14426213ab2a293862fd3d7a961
-
 
 static uint CrcTable[] = {
             0x00000000, 0x77073096, 0x0EE0E612C, 0x990951BA, 0x76DC419, 0x706AF48F, 0x0E963A535, 0x9E6495A3,
@@ -133,7 +129,6 @@ int32_t CFFFlashContainer::CrcAccumulate()
 
 CFFFlashHeader * CFFFlashContainer::ReadFlashCFF()
 {
-<<<<<<< HEAD
     this->m_FlashHeader = CFFFlashHeader::readFlashHeader(this->m_cff_file, this);
     return this->m_FlashHeader;
 }
@@ -151,8 +146,4 @@ CTFHeader * CFFFlashContainer::ReadCTF()
     this->m_CTFHeader = CTFHeader::readCTFHeader(this->m_cff_file, ctfOffset, this->m_FlashHeader->CffHeaderSize());
 
     return this->m_CTFHeader;
-=======
-    auto CaesarFlashHeader = CFFFlashHeader::readFlashHeader(this->m_cff_file, this);
-    return CaesarFlashHeader;
->>>>>>> 6a3ae424ef77d14426213ab2a293862fd3d7a961
 }

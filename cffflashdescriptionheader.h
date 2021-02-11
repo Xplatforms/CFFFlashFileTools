@@ -4,50 +4,6 @@
 #include <QObject>
 #include <QFile>
 
-<<<<<<< HEAD
-=======
-/*
-// FLASH_DESCRIPTION_HEADER
-    // 0x10: 4 :  4, 4, 4, 4,  4, 4, 4, 4,  4, 4, 4, 4
-    public class FlashDescriptionHeader
-    {
-        public string Qualifier;
-        public int Description;
-        public int FlashAreaName;
-        public int FlashTableStructureCount;
-        public int FlashTableStructureOffset;
-        public int NumberOfUploads;
-        public int UploadTableRefTable;
-        public int NumberOfIdentServices;
-        public int IdentServicesOffset;
-        public int UniqueObjectID;
-        public int unkb;
-        public int unkc;
-        public long BaseAddress;
-
-        public FlashDescriptionHeader(BinaryReader reader, long baseAddress)
-        {
-            BaseAddress = baseAddress;
-
-            reader.BaseStream.Seek(baseAddress, SeekOrigin.Begin);
-            ulong flashBitFlags = reader.ReadUInt32();
-
-            Qualifier = CaesarReader.ReadBitflagStringWithReader(ref flashBitFlags, reader, baseAddress);
-            Description = CaesarReader.ReadBitflagInt32(ref flashBitFlags, reader);
-            FlashAreaName = CaesarReader.ReadBitflagInt32(ref flashBitFlags, reader);
-            FlashTableStructureCount = CaesarReader.ReadBitflagInt32(ref flashBitFlags, reader);
-            FlashTableStructureOffset = CaesarReader.ReadBitflagInt32(ref flashBitFlags, reader);
-            NumberOfUploads = CaesarReader.ReadBitflagInt32(ref flashBitFlags, reader);
-            UploadTableRefTable = CaesarReader.ReadBitflagInt32(ref flashBitFlags, reader);
-            NumberOfIdentServices = CaesarReader.ReadBitflagInt32(ref flashBitFlags, reader);
-            IdentServicesOffset = CaesarReader.ReadBitflagInt32(ref flashBitFlags, reader);
-            UniqueObjectID = CaesarReader.ReadBitflagInt32(ref flashBitFlags, reader);
-            unkb = CaesarReader.ReadBitflagInt32(ref flashBitFlags, reader);
-            unkc = CaesarReader.ReadBitflagInt32(ref flashBitFlags, reader);
-        }
-*/
-
->>>>>>> 6a3ae424ef77d14426213ab2a293862fd3d7a961
 class CFFFlashDescriptionHeader : public QObject
 {
     Q_OBJECT
