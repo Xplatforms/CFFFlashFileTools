@@ -6,9 +6,11 @@ CFFFlashDataBlock::CFFFlashDataBlock(QObject *parent) : QObject(parent)
 
 }
 
-CFFFlashDataBlock * CFFFlashDataBlock::readFlashDataBlock(QFile * cff, long baseAddress, QObject * parent)
+CFFFlashDataBlock * CFFFlashDataBlock::readFlashDataBlock(QFile * cff, long baseAddress, uint32_t CffHeaderSize, uint32_t LanguageBlockLength, QObject * parent)
 {
     auto cff_flash_block = new CFFFlashDataBlock(parent);
+    cff_flash_block->m_CffHeaderSize = CffHeaderSize;
+    cff_flash_block->m_LanguageBlockLength = LanguageBlockLength;
     cff_flash_block->readCFFData(cff, baseAddress);
     return cff_flash_block;
 }
@@ -82,6 +84,7 @@ void CFFFlashDataBlock::readCFFData(QFile * cff, long baseAddress)
     this->setFlashDataInfo_Idk2(FlashDataInfo_Idk2);
 
 
+    long fileCursor = 0;
     // CtfUnk1 = CaesarReader.ReadBitflagInt32(ref ctfBitflags, reader);
     auto FlashSegments = QList<CFFFlashSegment *>();
     for (int segmentIndex = 0; segmentIndex < NumberOfSegments; segmentIndex++)
@@ -93,13 +96,19 @@ void CFFFlashDataBlock::readCFFData(QFile * cff, long baseAddress)
         cff->read((char*)&pos, 4);
         long segmentBaseAddress = SegmentOffset + baseAddress + pos;
 
-        auto segment = CFFFlashSegment::readFlashSegment(cff,segmentBaseAddress, this);
+        long offset = this->FlashData() + this->m_CffHeaderSize + this->m_LanguageBlockLength + fileCursor + 0x414;
+        auto segment = CFFFlashSegment::readFlashSegment(cff,segmentBaseAddress, offset, this);
+
+        fileCursor += segment->SegmentLength();
+
         FlashSegments.append(segment);
     }
     this->setFlashSegments(FlashSegments);
 
     qDbg() << "Qualifier" <<  this->Qualifier();
     qDbg() << "FlashDataInfo_Idk" <<  this->FlashDataInfo_Idk();
+    qDbg() << "BlockLength " << this->BlockLength();
+    qDbg() << "FlashData " << this->FlashData();
 
 }
 

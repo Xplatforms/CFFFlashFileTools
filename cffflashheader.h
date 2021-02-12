@@ -17,11 +17,16 @@ public:
 
     Q_PROPERTY(int32_t CTFHeaderTable READ CTFHeaderTable NOTIFY CTFHeaderTableChanged);
     Q_PROPERTY(int32_t CffHeaderSize READ CffHeaderSize NOTIFY CffHeaderSizeChanged);
-    Q_PROPERTY(long BaseAddress READ BaseAddress);
+    Q_PROPERTY(QList<CFFFlashDescriptionHeader *> FlashDescriptionHeaders READ FlashDescriptionHeaders NOTIFY FlashDescriptionHeadersChanged);
+    Q_PROPERTY(QList<CFFFlashDataBlock *> FlashDataBlocks READ FlashDataBlocks NOTIFY FlashDataBlocksChanged);
+    Q_PROPERTY(long BaseAddress READ BaseAddress NOTIFY BaseAddressChanged);
 
     int32_t CTFHeaderTable(){return this->m_CTFHeaderTable;}
     int32_t CffHeaderSize(){return this->m_CffHeaderSize;}
+    QList<CFFFlashDescriptionHeader *> FlashDescriptionHeaders(){return this->m_desc_headers;}
+    QList<CFFFlashDataBlock *> FlashDataBlocks(){return this->m_flash_data_blocks;}
     long BaseAddress(){return this->m_BaseAddress;}
+
 
 private:
     explicit CFFFlashHeader(QObject *parent = nullptr);
@@ -31,6 +36,9 @@ private:
 signals:
     void CTFHeaderTableChanged();
     void CffHeaderSizeChanged();
+    void FlashDescriptionHeadersChanged();
+    void FlashDataBlocksChanged();
+    void BaseAddressChanged();
 
 private:
     QFile * m_cff_file;

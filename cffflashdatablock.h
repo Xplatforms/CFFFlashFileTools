@@ -13,7 +13,7 @@ class CFFFlashDataBlock : public QObject
     Q_OBJECT
 public:
     explicit CFFFlashDataBlock(QObject *parent = nullptr);
-    static CFFFlashDataBlock * readFlashDataBlock(QFile * cff, long baseAddress, QObject * parent = Q_NULLPTR);
+    static CFFFlashDataBlock * readFlashDataBlock(QFile * cff, long baseAddress, uint32_t CffHeaderSize, uint32_t LanguageBlockLength, QObject * parent = Q_NULLPTR);
 
     Q_PROPERTY(QString Qualifier READ Qualifier WRITE setQualifier NOTIFY QualifierChanged);
     Q_PROPERTY(QString DataBlockType READ DataBlockType WRITE setDataBlockType NOTIFY DataBlockTypeChanged);
@@ -154,6 +154,9 @@ private:
     int32_t m_FlashDataInfo_Idk2;
     QList<CFFFlashSegment *> m_FlashSegments;
     long    m_BaseAddress;
+
+    uint32_t m_CffHeaderSize;
+    uint32_t m_LanguageBlockLength;
 
 };
 

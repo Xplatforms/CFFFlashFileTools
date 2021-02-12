@@ -28,8 +28,9 @@ void CFFFlashHeader::readFlash()
 
     this->m_CffHeaderSize  = 0;
     this->m_cff_file->read((char*)&this->m_CffHeaderSize, 4); emit CffHeaderSizeChanged();
+    qDbg() << "CffHeaderSize " << this->m_CffHeaderSize;
 
-    this->m_BaseAddress = this->m_cff_file->pos();
+    this->m_BaseAddress = this->m_cff_file->pos(); emit BaseAddressChanged();
 
 
     ulong bitFlags = 0;
@@ -88,6 +89,7 @@ void CFFFlashHeader::readFlash()
         auto fdh = CFFFlashDescriptionHeader::readDescriptionHeader(this->m_cff_file, flashEntryBaseAddress, this);
         this->m_desc_headers.append(fdh);
     }
+    emit FlashDescriptionHeadersChanged();
 
 
     for (int dataBlockIndex = 0; dataBlockIndex < DataBlockTableCountProbably; dataBlockIndex++)
@@ -100,9 +102,10 @@ void CFFFlashHeader::readFlash()
         this->m_cff_file->read((char*)&block_pos, 4);
 
         long datablockBaseAddress = DataBlockRefTable + this->m_BaseAddress + block_pos;
-        auto fdb = CFFFlashDataBlock::readFlashDataBlock(this->m_cff_file, datablockBaseAddress, this);
+        auto fdb = CFFFlashDataBlock::readFlashDataBlock(this->m_cff_file, datablockBaseAddress, this->CffHeaderSize(), LanguageBlockLength, this);
         this->m_flash_data_blocks.append(fdb);
     }
+    emit FlashDataBlocksChanged();
 
 
     qDbg() << "FlashName: " << FlashName;
