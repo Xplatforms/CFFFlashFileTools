@@ -11,19 +11,19 @@ class CFFFlashContainer : public QObject
 {
     Q_OBJECT
 public:
-    static CFFFlashContainer * openCaesarFlashContainer(QString fname, QObject *parent = nullptr);
+    explicit CFFFlashContainer(QObject *parent = nullptr);
+
+
+    Q_INVOKABLE static CFFFlashContainer * openCaesarFlashContainer(QString fname, QObject *parent = nullptr);
+
+    Q_INVOKABLE uint32_t readChecksum();
+    Q_INVOKABLE uint32_t genChecksum();
 
     QByteArray readHeader();
     QByteArray readCFFHeader();
-    int32_t readChecksum();
-    int32_t CrcAccumulate();
-    CFFFlashHeader * ReadFlashCFF();
 
-    CTFHeader * ReadCTF();
-
-
-private:
-    explicit CFFFlashContainer(QObject *parent = nullptr);
+    Q_INVOKABLE CFFFlashHeader * readFlashCFF();
+    Q_INVOKABLE CTFHeader * readCTF();
 
 
 signals:

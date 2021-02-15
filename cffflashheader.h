@@ -12,8 +12,11 @@ class CFFFlashHeader : public QObject
 {
     Q_OBJECT
 public:
-    static CFFFlashHeader * readFlashHeader(QFile * cff, QObject * parent = Q_NULLPTR);
+    explicit CFFFlashHeader(QObject *parent = nullptr);
+    Q_INVOKABLE static CFFFlashHeader * readFlashHeader(QFile * cff, QObject * parent = Q_NULLPTR);
 
+    Q_PROPERTY(QString FlashName READ FlashName WRITE setFlashName NOTIFY FlashNameChanged);
+    Q_PROPERTY(QString FileAuthor READ FileAuthor WRITE setFileAuthor NOTIFY FileAuthorChanged);
 
     Q_PROPERTY(int32_t CTFHeaderTable READ CTFHeaderTable NOTIFY CTFHeaderTableChanged);
     Q_PROPERTY(int32_t CffHeaderSize READ CffHeaderSize NOTIFY CffHeaderSizeChanged);
@@ -26,10 +29,14 @@ public:
     QList<CFFFlashDescriptionHeader *> FlashDescriptionHeaders(){return this->m_desc_headers;}
     QList<CFFFlashDataBlock *> FlashDataBlocks(){return this->m_flash_data_blocks;}
     long BaseAddress(){return this->m_BaseAddress;}
+    QString FlashName(){return this->m_FlashName;}
+    QString FileAuthor(){return this->m_FileAuthor;}
+
+    void setFlashName(QString data){this->m_FlashName = data;}
+    void setFileAuthor(QString data){this->m_FileAuthor = data;}
 
 
 private:
-    explicit CFFFlashHeader(QObject *parent = nullptr);
     void readFlash();
 
 
@@ -39,9 +46,14 @@ signals:
     void FlashDescriptionHeadersChanged();
     void FlashDataBlocksChanged();
     void BaseAddressChanged();
+    void FileAuthorChanged();
+    void FlashNameChanged();
 
 private:
     QFile * m_cff_file;
+
+    QString m_FlashName;
+    QString m_FileAuthor;
 
     int32_t m_CTFHeaderTable;
     int32_t m_CffHeaderSize;

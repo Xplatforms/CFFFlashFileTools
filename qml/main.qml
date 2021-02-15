@@ -1,13 +1,45 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 
+import xplatforms.cffflashcontainer.container 1.0
+
 ApplicationWindow {
     id: window
-    width: 640
-    height: 480
+    width: 720
+    height: 420
     visible: true
-    title: qsTr("Stack")
+    title: qsTr("CFF Flash Files Tools")
 
+    QtObject
+    {
+        id: cff_object
+        //property CFFFlashContainer container: CFFFlashContainer{}
+        property string selected_fname: ""
+    }
+
+
+
+    property font headerFont: Qt.font(
+    {
+      family: 'Segoe UI',
+      weight: Font.DemiBold,
+      italic: false,
+      pointSize: 14
+    })
+
+    property font headerFont12: Qt.font(
+    {
+      family: 'Segoe UI',
+      weight: Font.DemiBold,
+      italic: false,
+      pointSize: 12
+    })
+
+
+
+
+
+    /*
     header: ToolBar {
         contentHeight: toolButton.implicitHeight
 
@@ -29,7 +61,9 @@ ApplicationWindow {
             anchors.centerIn: parent
         }
     }
+    */
 
+    /*
     Drawer {
         id: drawer
         width: window.width * 0.66
@@ -56,10 +90,11 @@ ApplicationWindow {
             }
         }
     }
+    */
 
     StackView {
         id: stackView
-        initialItem: "HomeForm.ui.qml"
+        initialItem: "HomeScreen.qml"
         anchors.fill: parent
     }
 }

@@ -3,6 +3,8 @@
 #include "cffflashheader.h"
 #include "ctfheader.h"
 
+#include <QUrl>
+
 static uint CrcTable[] = {
             0x00000000, 0x77073096, 0x0EE0E612C, 0x990951BA, 0x76DC419, 0x706AF48F, 0x0E963A535, 0x9E6495A3,
             0x0EDB8832, 0x79DCB8A4, 0x0E0D5E91E, 0x97D2D988, 0x9B64C2B, 0x7EB17CBD, 0x0E7B82D07, 0x90BF1D91,
@@ -49,7 +51,14 @@ CFFFlashContainer::CFFFlashContainer(QObject *parent) : QObject(parent)
 
 CFFFlashContainer * CFFFlashContainer::openCaesarFlashContainer(QString fname, QObject *parent)
 {
+    if(fname.startsWith(QStringLiteral("file:")))
+    {
+        fname = QDir::toNativeSeparators(QUrl(fname).toLocalFile());
+    }
+    else fname = QDir::toNativeSeparators(fname);
+
     qDbg() << fname;
+
     auto container = new CFFFlashContainer(parent);
     container->m_cff_file = new QFile(QDir::toNativeSeparators(fname), container);
     if(!container->m_cff_file->exists() || !container->m_cff_file->open(QIODevice::ReadOnly))
@@ -59,6 +68,7 @@ CFFFlashContainer * CFFFlashContainer::openCaesarFlashContainer(QString fname, Q
     }
     container->m_cff_mem = container->m_cff_file->readAll();
     container->m_cff_file->seek(0);
+    qDbg() << "";
     return container;
 }
 
@@ -99,15 +109,15 @@ QByteArray CFFFlashContainer::readCFFHeader()
     return cffHeaderData;
 }
 
-int32_t CFFFlashContainer::readChecksum()
+uint32_t CFFFlashContainer::readChecksum()
 {
-    int32_t chksum = 0;
-    memcpy(&chksum, this->m_cff_mem.right(4).data(), sizeof(int32_t));
+    uint32_t chksum = 0;
+    memcpy(&chksum, this->m_cff_mem.right(4).data(), sizeof(uint32_t));
     qDbg() << "checsum: " << chksum;
     return chksum;
 }
 
-int32_t CFFFlashContainer::CrcAccumulate()
+uint32_t CFFFlashContainer::genChecksum()
 {
     auto inputBuffer = this->m_cff_mem.data();
     auto length = this->m_cff_mem.length()-4;
@@ -127,13 +137,13 @@ int32_t CFFFlashContainer::CrcAccumulate()
     return currentChecksum;
 }
 
-CFFFlashHeader * CFFFlashContainer::ReadFlashCFF()
+CFFFlashHeader * CFFFlashContainer::readFlashCFF()
 {
     this->m_FlashHeader = CFFFlashHeader::readFlashHeader(this->m_cff_file, this);
     return this->m_FlashHeader;
 }
 
-CTFHeader * CFFFlashContainer::ReadCTF()
+CTFHeader * CFFFlashContainer::readCTF()
 {
     //auto CtfHeader = CTFHeader::readCTFHeader(this->m_cff_file, )
     if (this->m_FlashHeader->CTFHeaderTable() == 0)

@@ -16,6 +16,14 @@ int main(int argc, char *argv[])
 
     QGuiApplication app(argc, argv);
 
+    qRegisterMetaType<uint32_t>("uint32_t");
+    qmlRegisterType<CFFFlashContainer>("xplatforms.cffflashcontainer.container", 1, 0, "CFFFlashContainer");
+    qmlRegisterType<CFFFlashHeader>("xplatforms.cffflashcontainer.flashheader", 1, 0, "CFFFlashHeader");
+    qmlRegisterType<CFFFlashDataBlock>("xplatforms.cffflashcontainer.flashblock", 1, 0, "CFFFlashDataBlock");
+    //qmlRegisterType<QList<CFFFlashDataBlock*> >("xplatforms.cffflashcontainer.flashblocks", 1, 0, "CFFFlashDataBlocks");
+
+
+
     QQmlApplicationEngine engine;
     const QUrl url(QStringLiteral("qrc:/qml/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
@@ -24,20 +32,21 @@ int main(int argc, char *argv[])
             QCoreApplication::exit(-1);
 
 
-        auto cff = CFFFlashContainer::openCaesarFlashContainer("c:\\DIAG\\Dev\\219\\cbf\\ME28\\2049023103_001.CFF", obj);
+        auto cff = CFFFlashContainer::openCaesarFlashContainer("c:\\DIAG\\Dev\\219\\cbf\\TEST\\2049023103_001.CFF", obj);
+
         auto header = cff->readHeader();
         auto cff_header = cff->readCFFHeader();
         auto cff_chksum = cff->readChecksum();
-        auto cff_calc_chksum = cff->CrcAccumulate();
-        auto cff_flash_header = cff->ReadFlashCFF();
-        auto ctf_header = cff->ReadCTF();
+        auto cff_calc_chksum = cff->genChecksum();
+        auto cff_flash_header = cff->readFlashCFF();
+        auto ctf_header = cff->readCTF();
 
         foreach(auto db, cff_flash_header->FlashDataBlocks())
         {
             foreach(auto segment, db->FlashSegments())
             {
                 qDbg() << "Segment: " << segment->SegmentName();
-                QFile seg_file("c:\\DIAG\\Dev\\219\\cbf\\ME28\\"+segment->SegmentName()+".flash");
+                QFile seg_file("c:\\DIAG\\Dev\\219\\cbf\\TEST\\"+segment->SegmentName()+".flash");
                 if(seg_file.open(QIODevice::WriteOnly))
                 {
                     seg_file.write(segment->readFlashSegment());
@@ -45,6 +54,7 @@ int main(int argc, char *argv[])
                 }
             }
         }
+
         //foreach(auto db , cff_flash_header->)
 
 

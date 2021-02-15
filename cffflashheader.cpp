@@ -40,7 +40,7 @@ void CFFFlashHeader::readFlash()
     this->m_cff_file->read((char*)&tmp, 2);
 
 
-    auto FlashName = CFFUtils::ReadBitflagString(bitFlags, this->m_cff_file, this->m_BaseAddress);
+    this->setFlashName(CFFUtils::ReadBitflagString(bitFlags, this->m_cff_file, this->m_BaseAddress));
     auto FlashGenerationParams = CFFUtils::ReadBitflagString(bitFlags, this->m_cff_file, this->m_BaseAddress);
 
 
@@ -48,7 +48,7 @@ void CFFFlashHeader::readFlash()
     int32_t Unk4 = ReadBitflag4Byte(Unk4, bitFlags, this->m_cff_file);
 
 
-    auto FileAuthor = CFFUtils::ReadBitflagString(bitFlags, this->m_cff_file, this->m_BaseAddress);
+    this->setFileAuthor(CFFUtils::ReadBitflagString(bitFlags, this->m_cff_file, this->m_BaseAddress));
     auto FileCreationTime = CFFUtils::ReadBitflagString(bitFlags, this->m_cff_file, this->m_BaseAddress);
     auto AuthoringToolVersion = CFFUtils::ReadBitflagString(bitFlags, this->m_cff_file, this->m_BaseAddress);
     auto FTRAFOVersionString = CFFUtils::ReadBitflagString(bitFlags, this->m_cff_file, this->m_BaseAddress);
@@ -108,10 +108,10 @@ void CFFFlashHeader::readFlash()
     emit FlashDataBlocksChanged();
 
 
-    qDbg() << "FlashName: " << FlashName;
+    qDbg() << "FlashName: " << this->FlashName();
     qDbg() << "FlashGenerationParams: " << FlashGenerationParams;
     qDbg() << "Unk3 " << Unk3 << "Unk4 " << Unk4;
-    qDbg() << "FileAuthor: " << FileAuthor;
+    qDbg() << "FileAuthor: " << this->FileAuthor();
     qDbg() << "FileCreationTime: " << FileCreationTime;
     qDbg() << "AuthoringToolVersion: " << AuthoringToolVersion;
     qDbg() << "FTRAFOVersionString: " << FTRAFOVersionString;
