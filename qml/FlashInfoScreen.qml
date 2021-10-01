@@ -6,6 +6,7 @@ import QtQuick.Dialogs 1.2
 import xplatforms.cffflashcontainer.container 1.0
 import xplatforms.cffflashcontainer.flashheader 1.0
 import xplatforms.cffflashcontainer.flashblock 1.0
+import xplatforms.cffflashcontainer.flashblocksmodel 1.0
 
 Page {
 
@@ -13,6 +14,7 @@ Page {
     padding: 5
 
     property CFFFlashContainer cff: CFFFlashContainer{}
+    property CFFFlashDataBlocksModel blocks_model: CFFFlashDataBlocksModel{}
     property CFFFlashHeader flash_header: null
     property int cff_checksum: 0
     property int cff_calculated_checksum: 0
@@ -24,6 +26,8 @@ Page {
         cff_calculated_checksum = cff.genChecksum();
 
         flash_header = cff.readFlashCFF();
+        //blocks_model.addFlashDataBlocks(flash_header.FlashDataBlocks);
+        flash_header.updateModel(blocks_model);
 
         console.log(flash_header.FlashName)
     }
@@ -60,14 +64,26 @@ Page {
             }
         }
 
-        ListView
+        Rectangle
         {
-            model: flash_header.FlashDataBlocks
-            delegate: ColumnLayout
+            Layout.fillWidth: true
+            height: 1
+            color: "black"
+        }
+
+        RowLayout
+        {
+            Layout.fillHeight: true
+            ListView
             {
-                RowLayout
+                model: blocks_model
+                delegate: ColumnLayout
                 {
-                    Label{text: ItemDelegate.data}
+                    RowLayout
+                    {
+                        Label{text: FlashDataBlock.Qualifier}
+                        //Label{text: "test"}
+                    }
                 }
             }
         }

@@ -6,6 +6,7 @@
 #include "cffflashheader.h"
 #include "cffflashdescriptionheader.h"
 #include "cffflashdatablock.h"
+#include "cffflashdatablocksmodel.h"
 #include "cffflashsegment.h"
 
 int main(int argc, char *argv[])
@@ -20,7 +21,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<CFFFlashContainer>("xplatforms.cffflashcontainer.container", 1, 0, "CFFFlashContainer");
     qmlRegisterType<CFFFlashHeader>("xplatforms.cffflashcontainer.flashheader", 1, 0, "CFFFlashHeader");
     qmlRegisterType<CFFFlashDataBlock>("xplatforms.cffflashcontainer.flashblock", 1, 0, "CFFFlashDataBlock");
-    //qmlRegisterType<QList<CFFFlashDataBlock*> >("xplatforms.cffflashcontainer.flashblocks", 1, 0, "CFFFlashDataBlocks");
+    qmlRegisterType<CFFFlashDataBlocksModel>("xplatforms.cffflashcontainer.flashblocksmodel", 1, 0, "CFFFlashDataBlocksModel");
 
 
 
@@ -32,7 +33,7 @@ int main(int argc, char *argv[])
             QCoreApplication::exit(-1);
 
 
-        auto cff = CFFFlashContainer::openCaesarFlashContainer("c:\\DIAG\\Dev\\219\\cbf\\TEST\\2049023103_001.CFF", obj);
+        auto cff = CFFFlashContainer::openCaesarFlashContainer("c:\\Dev\\ZGW211.CFF", obj);
 
         auto header = cff->readHeader();
         auto cff_header = cff->readCFFHeader();
@@ -41,12 +42,13 @@ int main(int argc, char *argv[])
         auto cff_flash_header = cff->readFlashCFF();
         auto ctf_header = cff->readCTF();
 
+        qDbg() << " foreach data bloc";
         foreach(auto db, cff_flash_header->FlashDataBlocks())
         {
             foreach(auto segment, db->FlashSegments())
             {
                 qDbg() << "Segment: " << segment->SegmentName();
-                QFile seg_file("c:\\DIAG\\Dev\\219\\cbf\\TEST\\"+segment->SegmentName()+".flash");
+                QFile seg_file("c:\\Dev\\MB\\"+segment->SegmentName()+".flash");
                 if(seg_file.open(QIODevice::WriteOnly))
                 {
                     seg_file.write(segment->readFlashSegment());

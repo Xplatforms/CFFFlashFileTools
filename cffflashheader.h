@@ -5,7 +5,7 @@
 #include <QList>
 #include <QFile>
 
-
+class CFFFlashDataBlocksModel;
 class CFFFlashDescriptionHeader;
 class CFFFlashDataBlock;
 class CFFFlashHeader : public QObject
@@ -23,6 +23,8 @@ public:
     Q_PROPERTY(QList<CFFFlashDescriptionHeader *> FlashDescriptionHeaders READ FlashDescriptionHeaders NOTIFY FlashDescriptionHeadersChanged);
     Q_PROPERTY(QList<CFFFlashDataBlock *> FlashDataBlocks READ FlashDataBlocks NOTIFY FlashDataBlocksChanged);
     Q_PROPERTY(long BaseAddress READ BaseAddress NOTIFY BaseAddressChanged);
+
+    Q_INVOKABLE void updateModel(CFFFlashDataBlocksModel *);
 
     int32_t CTFHeaderTable(){return this->m_CTFHeaderTable;}
     int32_t CffHeaderSize(){return this->m_CffHeaderSize;}

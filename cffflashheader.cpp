@@ -2,6 +2,7 @@
 #include "cffflashheader.h"
 #include "cffflashdescriptionheader.h"
 #include "cffflashdatablock.h"
+#include "cffflashdatablocksmodel.h"
 
 
 
@@ -128,6 +129,10 @@ void CFFFlashHeader::readFlash()
     qDbgVar(UnkTableCount);
     qDbgVar(UnkTableProbably);
     qDbgVar(Unk15);
+}
 
-
+void CFFFlashHeader::updateModel(CFFFlashDataBlocksModel * model)
+{
+    qDbg() << "update blocks model!";
+    model->addFlashDataBlocks(this->m_flash_data_blocks);
 }

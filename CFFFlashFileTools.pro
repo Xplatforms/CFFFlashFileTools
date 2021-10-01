@@ -13,6 +13,7 @@ TARGET=CFFFlashFileTools
 SOURCES += \
         cffflashcontainer.cpp \
         cffflashdatablock.cpp \
+        cffflashdatablocksmodel.cpp \
         cffflashdescriptionheader.cpp \
         cffflashheader.cpp \
         cffflashsegment.cpp \
@@ -40,6 +41,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 HEADERS += \
     cffflashcontainer.h \
     cffflashdatablock.h \
+    cffflashdatablocksmodel.h \
     cffflashdescriptionheader.h \
     cffflashheader.h \
     cffflashsegment.h \
