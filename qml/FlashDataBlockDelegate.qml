@@ -9,7 +9,11 @@ import xplatforms.cffflashcontainer.flashsegmentmodel 1.0
 Item
 {
     property CFFFlashDataBlock block;
-    property CFFFlashSegmentModel segments_model: CFFFlashSegmentModel{};
+    property CFFFlashSegmentModel segments_model: CFFFlashSegmentModel{}
+    Component.onCompleted: {
+        block.updateModel(segments_model);
+        //segments_model.addFlashSegments(block.FlashSegments);
+    }
 
     ColumnLayout
     {
@@ -34,20 +38,22 @@ Item
             //Label{text: "test"}
         }
 
-        RowLayout
+
+        ListView
         {
             Layout.fillHeight: true
-            ListView
+            model: segments_model
+            //block.getSegmentsModel()//segments_model.addFlashSegments(block.FlashSegments)
+            delegate:
+                RowLayout
             {
-                model: segments_model.addFlashSegments(block.FlashSegments)
-                delegate: ColumnLayout
-                {
-                    RowLayout
-                    {
-                        Label{text: "segment" }
-                    }
-                }
+                Label{text: "segment" }
+                Label{text: FlashSegment.SegmentName}
             }
+
         }
     }
+
+
+
 }

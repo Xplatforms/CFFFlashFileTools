@@ -113,4 +113,8 @@ void CFFFlashDataBlock::readCFFData(QFile * cff, long baseAddress)
 
 }
 
-
+void CFFFlashDataBlock::updateModel(CFFFlashSegmentModel * model)
+{
+    qDbg() << "update blocks model!";
+    model->addFlashSegments(this->m_FlashSegments);
+}

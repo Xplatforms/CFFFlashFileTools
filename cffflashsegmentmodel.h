@@ -24,7 +24,7 @@ public:
     QHash<int, QByteArray> roleNames() const override{return this->m_roles;}
 
     Q_INVOKABLE void addFlashSegment(CFFFlashSegment *);
-    Q_INVOKABLE CFFFlashSegmentModel * addFlashSegments(QList<CFFFlashSegment *>);
+    Q_INVOKABLE void addFlashSegments(QList<CFFFlashSegment *>);
     Q_INVOKABLE void removeFlashSegment(CFFFlashSegment *);
     Q_INVOKABLE CFFFlashSegment * segmentAt(qint32 index);
 

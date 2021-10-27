@@ -7,6 +7,7 @@
 
 #include <QList>
 #include "cffflashsegment.h"
+#include "cffflashsegmentmodel.h"
 
 class CFFFlashDataBlock : public QObject
 {
@@ -41,6 +42,8 @@ public:
     Q_PROPERTY(int32_t FlashDataInfo_Idk2 READ FlashDataInfo_Idk2 WRITE setFlashDataInfo_Idk2 NOTIFY FlashDataInfo_Idk2Changed);
     Q_PROPERTY(QList<CFFFlashSegment *> FlashSegments READ FlashSegments WRITE setFlashSegments NOTIFY FlashSegmentsChanged);
     Q_PROPERTY(long BaseAddress READ BaseAddress WRITE setBaseAddress NOTIFY BaseAdressChanged);
+
+    Q_INVOKABLE void updateModel(CFFFlashSegmentModel * model);
 
     QString Qualifier(){return this->m_Qualifier;}
     int32_t LongName(){return this->m_LongName;}
