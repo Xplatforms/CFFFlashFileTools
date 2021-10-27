@@ -17,6 +17,7 @@ SOURCES += \
         cffflashdescriptionheader.cpp \
         cffflashheader.cpp \
         cffflashsegment.cpp \
+        cffflashsegmentmodel.cpp \
         cffutils.cpp \
         ctfheader.cpp \
         ctflanguage.cpp \
@@ -45,6 +46,7 @@ HEADERS += \
     cffflashdescriptionheader.h \
     cffflashheader.h \
     cffflashsegment.h \
+    cffflashsegmentmodel.h \
     cffutils.h \
     ctfheader.h \
     ctflanguage.h \

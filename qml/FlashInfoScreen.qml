@@ -7,6 +7,7 @@ import xplatforms.cffflashcontainer.container 1.0
 import xplatforms.cffflashcontainer.flashheader 1.0
 import xplatforms.cffflashcontainer.flashblock 1.0
 import xplatforms.cffflashcontainer.flashblocksmodel 1.0
+import xplatforms.cffflashcontainer.flashsegmentmodel 1.0
 
 Page {
 
@@ -77,7 +78,7 @@ Page {
             ListView
             {
                 model: blocks_model
-                delegate: FlashDataBlockDelegate{}
+                delegate: FlashDataBlockDelegate{block: FlashDataBlock }
             }
         }
 

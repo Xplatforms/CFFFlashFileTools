@@ -8,6 +8,7 @@
 #include "cffflashdatablock.h"
 #include "cffflashdatablocksmodel.h"
 #include "cffflashsegment.h"
+#include "cffflashsegmentmodel.h"
 
 int main(int argc, char *argv[])
 {
@@ -21,7 +22,9 @@ int main(int argc, char *argv[])
     qmlRegisterType<CFFFlashContainer>("xplatforms.cffflashcontainer.container", 1, 0, "CFFFlashContainer");
     qmlRegisterType<CFFFlashHeader>("xplatforms.cffflashcontainer.flashheader", 1, 0, "CFFFlashHeader");
     qmlRegisterType<CFFFlashDataBlock>("xplatforms.cffflashcontainer.flashblock", 1, 0, "CFFFlashDataBlock");
+    qmlRegisterType<CFFFlashSegment>("xplatforms.cffflashcontainer.flashsegment", 1, 0, "CFFFlashSegment");
     qmlRegisterType<CFFFlashDataBlocksModel>("xplatforms.cffflashcontainer.flashblocksmodel", 1, 0, "CFFFlashDataBlocksModel");
+    qmlRegisterType<CFFFlashSegmentModel>("xplatforms.cffflashcontainer.flashsegmentmodel", 1, 0, "CFFFlashSegmentModel");
 
 
 
