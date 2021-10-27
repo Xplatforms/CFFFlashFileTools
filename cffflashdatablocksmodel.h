@@ -6,8 +6,6 @@
 
 #include "cffflashdatablock.h"
 
-//class CFFFlashDataBlock;
-
 class CFFFlashDataBlocksModel : public QAbstractListModel
 {
     Q_OBJECT
