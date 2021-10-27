@@ -1,4 +1,4 @@
-QT += quick
+QT += qml quick
 
 CONFIG += c++20
 win32:CONFIG += c++latest
