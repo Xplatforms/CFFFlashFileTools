@@ -5,9 +5,13 @@
 #include <QList>
 #include <QFile>
 
-class CFFFlashDataBlocksModel;
-class CFFFlashDescriptionHeader;
-class CFFFlashDataBlock;
+#include "cffflashdatablock.h"
+#include "cffflashdescriptionheader.h"
+#include "cffflashdatablocksmodel.h"
+
+//class CFFFlashDataBlocksModel;
+//class CFFFlashDescriptionHeader;
+//class CFFFlashDataBlock;
 class CFFFlashHeader : public QObject
 {
     Q_OBJECT

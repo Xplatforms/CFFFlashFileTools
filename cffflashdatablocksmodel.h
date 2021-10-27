@@ -4,7 +4,9 @@
 #include <QAbstractListModel>
 #include <QObject>
 
-class CFFFlashDataBlock;
+#include "cffflashdatablock.h"
+
+//class CFFFlashDataBlock;
 
 class CFFFlashDataBlocksModel : public QAbstractListModel
 {
