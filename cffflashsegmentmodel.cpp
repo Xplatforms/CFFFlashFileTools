@@ -25,7 +25,7 @@ QVariant CFFFlashSegmentModel::data(const QModelIndex &index, int role) const
         return QVariant::fromValue(block);
 }
 
-CFFFlashSegmentModel * CFFFlashSegmentModel::addFlashSegments(QList<CFFFlashSegment *> blocks)
+void CFFFlashSegmentModel::addFlashSegments(QList<CFFFlashSegment *> blocks)
 {
     qDbg() << "ADD SEGMENTS" << blocks.count();
     //this->beginInsertRows(QModelIndex(), this->rowCount(), blocks.count()-1);
@@ -36,8 +36,6 @@ CFFFlashSegmentModel * CFFFlashSegmentModel::addFlashSegments(QList<CFFFlashSegm
     {
         this->addFlashSegment(block);
     }
-
-    return this;
 }
 
 void CFFFlashSegmentModel::addFlashSegment(CFFFlashSegment * block)
