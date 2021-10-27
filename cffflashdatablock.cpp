@@ -109,6 +109,7 @@ void CFFFlashDataBlock::readCFFData(QFile * cff, long baseAddress)
     qDbg() << "FlashDataInfo_Idk" <<  this->FlashDataInfo_Idk();
     qDbg() << "BlockLength " << this->BlockLength();
     qDbg() << "FlashData " << this->FlashData();
+    qDbg() << "FileName " << this->FileName();
 
 }
 

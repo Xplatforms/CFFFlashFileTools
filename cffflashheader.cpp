@@ -43,7 +43,7 @@ void CFFFlashHeader::readFlash()
 
 
     this->setFlashName(CFFUtils::ReadBitflagString(bitFlags, this->m_cff_file, this->m_BaseAddress));
-    auto FlashGenerationParams = CFFUtils::ReadBitflagString(bitFlags, this->m_cff_file, this->m_BaseAddress);
+    this->m_FlashGenerationParams = CFFUtils::ReadBitflagString(bitFlags, this->m_cff_file, this->m_BaseAddress);
 
 
     int32_t Unk3 = ReadBitflag4Byte(Unk3, bitFlags, this->m_cff_file);
@@ -51,13 +51,13 @@ void CFFFlashHeader::readFlash()
 
 
     this->setFileAuthor(CFFUtils::ReadBitflagString(bitFlags, this->m_cff_file, this->m_BaseAddress));
-    auto FileCreationTime = CFFUtils::ReadBitflagString(bitFlags, this->m_cff_file, this->m_BaseAddress);
-    auto AuthoringToolVersion = CFFUtils::ReadBitflagString(bitFlags, this->m_cff_file, this->m_BaseAddress);
-    auto FTRAFOVersionString = CFFUtils::ReadBitflagString(bitFlags, this->m_cff_file, this->m_BaseAddress);
+    this->m_FileCreationTime = CFFUtils::ReadBitflagString(bitFlags, this->m_cff_file, this->m_BaseAddress);
+    this->m_AuthoringToolVersion = CFFUtils::ReadBitflagString(bitFlags, this->m_cff_file, this->m_BaseAddress);
+    this->m_FTRAFOVersionString = CFFUtils::ReadBitflagString(bitFlags, this->m_cff_file, this->m_BaseAddress);
 
-    int32_t FTRAFOVersionNumber = ReadBitflag4Byte(FTRAFOVersionNumber, bitFlags, this->m_cff_file);;
+    this->m_FTRAFOVersionNumber = ReadBitflag4Byte(this->m_FTRAFOVersionNumber, bitFlags, this->m_cff_file);;
 
-    auto CFFVersionString = CFFUtils::ReadBitflagString(bitFlags, this->m_cff_file, this->m_BaseAddress);
+    this->m_CFFVersionString = CFFUtils::ReadBitflagString(bitFlags, this->m_cff_file, this->m_BaseAddress);
 
     int32_t NumberOfFlashAreas = ReadBitflag4Byte(NumberOfFlashAreas, bitFlags, this->m_cff_file);
     int32_t FlashDescriptionTable = ReadBitflag4Byte(FlashDescriptionTable, bitFlags, this->m_cff_file);
@@ -78,7 +78,6 @@ void CFFFlashHeader::readFlash()
 
     for (int flashDescIndex = 0; flashDescIndex < NumberOfFlashAreas; flashDescIndex++)
     {
-
         long flashTableEntryAddress = FlashDescriptionTable + this->m_BaseAddress + (flashDescIndex * 4);
 
         this->m_cff_file->seek(flashTableEntryAddress);
@@ -96,7 +95,6 @@ void CFFFlashHeader::readFlash()
 
     for (int dataBlockIndex = 0; dataBlockIndex < DataBlockTableCountProbably; dataBlockIndex++)
     {
-
         long datablockEntryAddress = DataBlockRefTable + this->m_BaseAddress + (dataBlockIndex * 4);
         this->m_cff_file->seek(datablockEntryAddress);
 
@@ -111,15 +109,14 @@ void CFFFlashHeader::readFlash()
 
 
     qDbg() << "FlashName: " << this->FlashName();
-    qDbg() << "LongName: " << this->LongName();
-    qDbg() << "FlashGenerationParams: " << FlashGenerationParams;
+    qDbg() << "FlashGenerationParams: " << this->m_FlashGenerationParams;
     qDbg() << "Unk3 " << Unk3 << "Unk4 " << Unk4;
     qDbg() << "FileAuthor: " << this->FileAuthor();
-    qDbg() << "FileCreationTime: " << FileCreationTime;
-    qDbg() << "AuthoringToolVersion: " << AuthoringToolVersion;
-    qDbg() << "FTRAFOVersionString: " << FTRAFOVersionString;
-    qDbg() << "FTRAFOVersionNumber: " << FTRAFOVersionNumber;
-    qDbg() << "CFFVersionString: " << CFFVersionString;
+    qDbg() << "FileCreationTime: " << this->m_FileCreationTime;
+    qDbg() << "AuthoringToolVersion: " << this->m_AuthoringToolVersion;
+    qDbg() << "FTRAFOVersionString: " << this->m_FTRAFOVersionString;
+    qDbg() << "FTRAFOVersionNumber: " << this->m_FTRAFOVersionNumber;
+    qDbg() << "CFFVersionString: " << this->m_CFFVersionString;
 
     qDbgVar(NumberOfFlashAreas);
     qDbgVar(FlashDescriptionTable);
