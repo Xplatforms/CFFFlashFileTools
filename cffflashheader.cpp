@@ -37,6 +37,7 @@ void CFFFlashHeader::readFlash()
     ulong bitFlags = 0;
     this->m_cff_file->read((char*)&bitFlags, 4);
 
+
     ushort tmp = 0;
     this->m_cff_file->read((char*)&tmp, 2);
 
@@ -110,6 +111,7 @@ void CFFFlashHeader::readFlash()
 
 
     qDbg() << "FlashName: " << this->FlashName();
+    qDbg() << "LongName: " << this->LongName();
     qDbg() << "FlashGenerationParams: " << FlashGenerationParams;
     qDbg() << "Unk3 " << Unk3 << "Unk4 " << Unk4;
     qDbg() << "FileAuthor: " << this->FileAuthor();

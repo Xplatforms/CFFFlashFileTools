@@ -77,14 +77,7 @@ Page {
             ListView
             {
                 model: blocks_model
-                delegate: ColumnLayout
-                {
-                    RowLayout
-                    {
-                        Label{text: FlashDataBlock.Qualifier}
-                        //Label{text: "test"}
-                    }
-                }
+                delegate: FlashDataBlockDelegate{}
             }
         }
 

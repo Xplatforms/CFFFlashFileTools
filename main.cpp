@@ -36,3 +36,31 @@ int main(int argc, char *argv[])
 
     return app.exec();
 }
+
+
+/*
+    auto cff = CFFFlashContainer::openCaesarFlashContainer("c:\\Dev\\2194470151_001.cff", obj);
+
+    auto header = cff->readHeader();
+    auto cff_header = cff->readCFFHeader();
+    auto cff_chksum = cff->readChecksum();
+    auto cff_calc_chksum = cff->genChecksum();
+    auto cff_flash_header = cff->readFlashCFF();
+    auto ctf_header = cff->readCTF();
+
+    qDbg() << " foreach data bloc";
+    foreach(auto db, cff_flash_header->FlashDataBlocks())
+    {
+        foreach(auto segment, db->FlashSegments())
+        {
+            qDbg() << "Segment: " << segment->SegmentName();
+            QFile seg_file("c:\\Dev\\MB\\"+segment->SegmentName()+".flash");
+            if(seg_file.open(QIODevice::WriteOnly))
+            {
+                seg_file.write(segment->readFlashSegment());
+                seg_file.close();
+            }
+        }
+    }*/
+
+    //foreach(auto db , cff_flash_header->)
