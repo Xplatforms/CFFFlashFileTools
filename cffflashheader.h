@@ -60,6 +60,13 @@ private:
 
     QString m_FlashName;
     QString m_FileAuthor;
+    QString m_FlashGenerationParams;
+    QString m_FileCreationTime;
+    QString m_AuthoringToolVersion;
+    QString m_FTRAFOVersionString;
+    int32_t m_FTRAFOVersionNumber;
+    QString m_CFFVersionString;
+
 
     int32_t m_CTFHeaderTable;
     int32_t m_CffHeaderSize;

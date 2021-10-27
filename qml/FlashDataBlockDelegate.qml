@@ -11,8 +11,21 @@ Component
     {
         RowLayout
         {
+            Label{
+                font.bold: true
+                text: "Qualifier: "
+            }
             Label{text: FlashDataBlock.Qualifier}
-            Label{text: FlashDataBlock.LongName}
+            //Label{text: "test"}
+        }
+
+        RowLayout
+        {
+            Label{
+                font.bold: true
+                text: "FlashDataInfo_Idk: "
+            }
+            Label{text: FlashDataBlock.FlashDataInfo_Idk}
             //Label{text: "test"}
         }
     }
