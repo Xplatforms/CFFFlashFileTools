@@ -4,5 +4,6 @@
         <file>qtquickcontrols2.conf</file>
         <file>qml/HomeScreen.qml</file>
         <file>qml/FlashInfoScreen.qml</file>
+        <file>qml/FlashDataBlockDelegate.qml</file>
     </qresource>
 </RCC>

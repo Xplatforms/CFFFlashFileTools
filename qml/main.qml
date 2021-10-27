@@ -5,7 +5,7 @@ import xplatforms.cffflashcontainer.container 1.0
 
 ApplicationWindow {
     id: window
-    width: 720
+    width: 1020
     height: 420
     visible: true
     title: qsTr("CFF Flash Files Tools")
@@ -16,8 +16,6 @@ ApplicationWindow {
         //property CFFFlashContainer container: CFFFlashContainer{}
         property string selected_fname: ""
     }
-
-
 
     property font headerFont: Qt.font(
     {
