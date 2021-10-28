@@ -153,7 +153,7 @@ CTFHeader * CFFFlashContainer::readCTF()
     }
 
     long ctfOffset = this->m_FlashHeader->BaseAddress() + this->m_FlashHeader->CTFHeaderTable();
-    this->m_CTFHeader = CTFHeader::readCTFHeader(this->m_cff_file, ctfOffset, this->m_FlashHeader->CffHeaderSize());
+    this->m_CTFHeader = CTFHeader::readCTFHeader(this->m_cff_file, ctfOffset, this->m_FlashHeader->CffHeaderSize(), this);
 
     return this->m_CTFHeader;
 }

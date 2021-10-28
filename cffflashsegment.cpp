@@ -82,6 +82,8 @@ void CFFFlashSegment::saveToFile(QString fpath)
     }
     else fpath = QDir::toNativeSeparators(fpath);
 
+    qDbg() << fpath;
+
     QFile seg_file(fpath);
     if(seg_file.open(QIODevice::WriteOnly))
     {

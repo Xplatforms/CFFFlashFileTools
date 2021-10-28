@@ -80,7 +80,7 @@ ColumnLayout
         //height: 200
         model: segments_model
         //block.getSegmentsModel()//segments_model.addFlashSegments(block.FlashSegments)
-        delegate: FlashSegmentModel{idk: block.FlashDataInfo_Idk}
+        delegate: FlashSegmentModel{idk: block.FlashDataInfo_Idk; segment: FlashSegment}
     }
 
     FolderDialog

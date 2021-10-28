@@ -11,6 +11,8 @@ import xplatforms.cffflashcontainer.flashsegmentmodel 1.0
 ColumnLayout
 {
     property string idk
+    property CFFFlashSegment segment;
+
     width: parent.width
     RowLayout
     {
@@ -19,7 +21,7 @@ ColumnLayout
         Label
         {
             font.weight: Font.DemiBold
-            text: FlashSegment.SegmentName
+            text: segment.SegmentName
         }
         Label
         {
@@ -27,7 +29,7 @@ ColumnLayout
         }
         Label
         {
-            text: FlashSegment.FromAdress
+            text: segment.FromAdress
         }
         Label
         {
@@ -35,7 +37,7 @@ ColumnLayout
         }
         Label
         {
-            text: FlashSegment.SegmentLength
+            text: segment.SegmentLength
         }
 
         Rectangle
@@ -67,7 +69,7 @@ ColumnLayout
 
         onAccepted: {
             console.log("You chose: " + file_save_dialog.folder)
-            FlashSegment.saveToFile(FlashSegment.SegmentName+"_"+idk+".segment");
+            segment.saveToFile(file_save_dialog.folder+"/"+segment.SegmentName+"_"+idk+".segment");
             //loadCFF(fileDialog.currentFile);
             //Qt.quit()
         }
