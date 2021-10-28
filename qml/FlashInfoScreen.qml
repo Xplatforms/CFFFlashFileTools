@@ -54,6 +54,21 @@ Page {
             {
                 text: flash_header.FlashName
             }
+
+            Rectangle
+            {
+                height: 1
+                Layout.fillWidth: true
+            }
+            Button
+            {
+                //Layout.fillWidth: true
+                text: " GO BACK "
+                onClicked:
+                {
+                    stackView.pop();
+                }
+            }
         }
 
         RowLayout
