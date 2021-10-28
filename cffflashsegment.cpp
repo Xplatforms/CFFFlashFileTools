@@ -1,6 +1,6 @@
 #include "defs.h"
 #include "cffflashsegment.h"
-
+#include <QUrl>
 
 CFFFlashSegment::CFFFlashSegment(QObject *parent) : QObject(parent)
 {
@@ -76,6 +76,12 @@ QByteArray CFFFlashSegment::readFlashSegment()
 
 void CFFFlashSegment::saveToFile(QString fpath)
 {
+    if(fpath.startsWith(QStringLiteral("file:")))
+    {
+        fpath = QDir::toNativeSeparators(QUrl(fpath).toLocalFile());
+    }
+    else fpath = QDir::toNativeSeparators(fpath);
+
     QFile seg_file(fpath);
     if(seg_file.open(QIODevice::WriteOnly))
     {

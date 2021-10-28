@@ -122,7 +122,11 @@ void CFFFlashDataBlock::updateModel(CFFFlashSegmentModel * model)
 
 void CFFFlashDataBlock::exportSegments(QString fpath)
 {
-    fpath = QUrl(fpath).toLocalFile();
+    if(fpath.startsWith(QStringLiteral("file:")))
+    {
+        fpath = QDir::toNativeSeparators(QUrl(fpath).toLocalFile());
+    }
+    else fpath = QDir::toNativeSeparators(fpath);
 
     if(!fpath.endsWith(QDir::separator()))
     {
