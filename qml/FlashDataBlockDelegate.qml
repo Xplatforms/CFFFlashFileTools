@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
+import Qt.labs.platform
 
 import xplatforms.cffflashcontainer.flashblock 1.0
 import xplatforms.cffflashcontainer.flashsegment 1.0
@@ -38,6 +39,22 @@ ColumnLayout
         }
         Label{text: block.FlashDataInfo_Idk}
         //Label{text: "test"}
+        Rectangle
+        {
+            height: 1
+            Layout.fillWidth: true
+        }
+        Button
+        {
+            //Layout.fillWidth: true
+            text: " Export all segments... "
+            onClicked:
+            {
+                console.log("export all segments");
+                export_dialog.open();
+
+            }
+        }
     }
 
     Rectangle
@@ -64,6 +81,28 @@ ColumnLayout
         model: segments_model
         //block.getSegmentsModel()//segments_model.addFlashSegments(block.FlashSegments)
         delegate: FlashSegmentModel{idk: block.FlashDataInfo_Idk}
+    }
+
+    FolderDialog
+    {
+        id: export_dialog
+        title: "Please choose where to export flash segments"
+        //fileMode: FolderDialog.OpenFolder
+        //folder: StandardPaths.writableLocation(StandardPaths.DocumentsLocation)
+
+        //nameFilters: [FlashSegment.SegmentName+".segment"]
+
+        onAccepted: {
+            console.log("You chose: " + export_dialog.folder)
+            //FlashSegment.saveToFile(FlashSegment.SegmentName+"_"+idk+".segment");
+            //loadCFF(fileDialog.currentFile);
+            //Qt.quit()
+        }
+        onRejected: {
+            console.log("Canceled")
+            //Qt.quit()
+        }
+        //Component.onCompleted: visible = true
     }
 }
 
