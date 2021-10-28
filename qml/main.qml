@@ -1,6 +1,6 @@
 import QtQuick
 import QtQuick.Controls
-
+import Qt.labs.platform
 import xplatforms.cffflashcontainer.container 1.0
 
 ApplicationWindow {
@@ -32,7 +32,6 @@ ApplicationWindow {
       italic: false,
       pointSize: 12
     })
-
 
 
 

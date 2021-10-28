@@ -1,4 +1,4 @@
-QT += qml quick
+QT += qml quick widgets
 
 CONFIG += c++20
 win32:CONFIG += c++latest
@@ -23,7 +23,8 @@ SOURCES += \
         ctflanguage.cpp \
         main.cpp
 
-RESOURCES += qml.qrc
+RESOURCES += qml.qrc \
+    images.qrc
 
 TRANSLATIONS += \
     CFFFlashFileTools_ru_RU.ts

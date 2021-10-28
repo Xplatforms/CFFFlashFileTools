@@ -31,12 +31,17 @@ Page {
         flash_header.updateModel(blocks_model);
 
         console.log(flash_header.FlashName)
+
+        console.log("Page width: " + width)
+
     }
 
     ColumnLayout
     {
         anchors.fill: parent
         spacing: 8
+
+        Component.onCompleted: {console.log("ColumnLayout width: " + width)}
 
         RowLayout
         {
@@ -74,17 +79,29 @@ Page {
 
         RowLayout
         {
+            width: parent.width
             Layout.fillHeight: true
-            ListView
-            {
-                model: blocks_model
-                delegate: FlashDataBlockDelegate{block: FlashDataBlock }
-            }
+            Layout.fillWidth: true
+
+            Component.onCompleted: {console.log("RowLayout width: " + width)}
+
+                ListView
+                {
+
+                    Component.onCompleted: {console.log("ListView width: " + width)}
+
+                    width: parent.width
+                    Layout.fillWidth: true
+                    //anchors.fill: parent
+                    model: blocks_model
+                    delegate: FlashDataBlockDelegate{block: FlashDataBlock; width: parent.width}
+                }
         }
 
         Rectangle
         {
             Layout.fillHeight: true
+            //Layout.fillWidth: true
             width: 1
         }
     }

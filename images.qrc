@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/save_btn.svg</file>
+    </qresource>
+</RCC>

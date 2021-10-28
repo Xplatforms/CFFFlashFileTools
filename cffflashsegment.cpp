@@ -73,3 +73,13 @@ QByteArray CFFFlashSegment::readFlashSegment()
 
     return data;
 }
+
+void CFFFlashSegment::saveToFile(QString fpath)
+{
+    QFile seg_file(fpath);
+    if(seg_file.open(QIODevice::WriteOnly))
+    {
+        seg_file.write(this->readFlashSegment());
+        seg_file.close();
+    }
+}

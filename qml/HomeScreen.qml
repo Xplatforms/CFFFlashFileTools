@@ -1,7 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
-import QtQuick.Dialogs
+import Qt.labs.platform
 
 import xplatforms.cffflashcontainer.container 1.0
 
@@ -90,8 +90,9 @@ Page {
                 anchors.fill: parent
                 onDropped:
                 {
-                    console.log("File dropped: " + drop.text);
-                    loadCFF(drop.text);
+
+                    if(drop.hasUrls)loadCFF(drop.urls[0]);
+                    else if(drop.hasText)loadCFF(drop.text);
                 }
             }
         }

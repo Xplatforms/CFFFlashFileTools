@@ -21,7 +21,8 @@ public:
     Q_PROPERTY(uint32_t Unk7 READ Unk7 WRITE setUnk7 NOTIFY Unk7Changed);
     Q_PROPERTY(long BaseAddress READ BaseAddress WRITE setBaseAddress NOTIFY BaseAddressChanged);
 
-    Q_INVOKABLE QByteArray readFlashSegment();
+    Q_INVOKABLE QByteArray readFlashSegment();    
+    Q_INVOKABLE void saveToFile(QString fpath);
 
     QString SegmentName(){return this->m_SegmentName;}
     uint32_t FromAdress(){return this->m_FromAdress;}
