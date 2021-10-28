@@ -94,6 +94,7 @@ ColumnLayout
 
         onAccepted: {
             console.log("You chose: " + export_dialog.folder)
+            block.exportSegments(export_dialog.folder);
             //FlashSegment.saveToFile(FlashSegment.SegmentName+"_"+idk+".segment");
             //loadCFF(fileDialog.currentFile);
             //Qt.quit()
