@@ -1,5 +1,6 @@
 #include "defs.h"
 #include "cffflashdatablock.h"
+#include <QUrl>
 
 CFFFlashDataBlock::CFFFlashDataBlock(QObject *parent) : QObject(parent)
 {
@@ -121,5 +122,21 @@ void CFFFlashDataBlock::updateModel(CFFFlashSegmentModel * model)
 
 void CFFFlashDataBlock::exportSegments(QString fpath)
 {
+    fpath = QUrl(fpath).toLocalFile();
 
+    if(!fpath.endsWith(QDir::separator()))
+    {
+        fpath.append(QDir::separator());
+    }
+
+    foreach(auto segment, this->FlashSegments())
+    {
+        qDbg() << "Segment: " << fpath+this->FlashDataInfo_Idk()+QLatin1String("_")+segment->SegmentName()+".segment";
+        QFile seg_file(fpath+this->FlashDataInfo_Idk()+QLatin1String("_")+segment->SegmentName()+".segment");
+        if(seg_file.open(QIODevice::WriteOnly))
+        {
+            seg_file.write(segment->readFlashSegment());
+            seg_file.close();
+        }
+    }
 }
