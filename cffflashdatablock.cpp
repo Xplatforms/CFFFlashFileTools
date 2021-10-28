@@ -118,3 +118,8 @@ void CFFFlashDataBlock::updateModel(CFFFlashSegmentModel * model)
     qDbg() << "update blocks model!";
     model->addFlashSegments(this->m_FlashSegments);
 }
+
+void CFFFlashDataBlock::exportSegments(QString fpath)
+{
+
+}

@@ -44,6 +44,7 @@ public:
     Q_PROPERTY(long BaseAddress READ BaseAddress WRITE setBaseAddress NOTIFY BaseAdressChanged);
 
     Q_INVOKABLE void updateModel(CFFFlashSegmentModel * model);
+    Q_INVOKABLE void exportSegments(QString fpath);
 
     QString Qualifier(){return this->m_Qualifier;}
     int32_t LongName(){return this->m_LongName;}
