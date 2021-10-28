@@ -29,16 +29,13 @@ Page {
         flash_header = cff.readFlashCFF();
         //blocks_model.addFlashDataBlocks(flash_header.FlashDataBlocks);
         flash_header.updateModel(blocks_model);
-
         console.log(flash_header.FlashName)
-
-        console.log("Page width: " + width)
-
     }
 
     ColumnLayout
     {
         anchors.fill: parent
+        anchors.margins: 5
         spacing: 8
 
         Component.onCompleted: {console.log("ColumnLayout width: " + width)}
@@ -67,6 +64,7 @@ Page {
                 onClicked:
                 {
                     stackView.pop();
+                    delete cff;
                 }
             }
         }
