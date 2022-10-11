@@ -3,6 +3,7 @@ import QtQuick.Layouts
 import QtQuick.Controls
 import Qt.labs.platform
 
+import xplatforms.cffflashcontainer.flashheader 1.0
 import xplatforms.cffflashcontainer.flashblock 1.0
 import xplatforms.cffflashcontainer.flashsegment 1.0
 import xplatforms.cffflashcontainer.flashsegmentmodel 1.0
@@ -10,6 +11,7 @@ import xplatforms.cffflashcontainer.flashsegmentmodel 1.0
 
 ColumnLayout
 {
+    property CFFFlashHeader header;
     property CFFFlashDataBlock block;
     property CFFFlashSegmentModel segments_model: CFFFlashSegmentModel{}
     Component.onCompleted: {
@@ -24,7 +26,7 @@ ColumnLayout
     {
         Label{
             font.bold: true
-            text: "Qualifier: "
+            text: "qualifier: "
         }
         Label{text: block.Qualifier}
         //Label{text: "test"}
@@ -46,7 +48,8 @@ ColumnLayout
         }
         Button
         {
-            //Layout.fillWidth: true
+            id: btn_export_all
+
             text: " Export all segments... "
             onClicked:
             {
@@ -80,7 +83,7 @@ ColumnLayout
         //height: 200
         model: segments_model
         //block.getSegmentsModel()//segments_model.addFlashSegments(block.FlashSegments)
-        delegate: FlashSegmentModel{idk: block.FlashDataInfo_Idk; segment: FlashSegment}
+        delegate: FlashSegmentModel{flash_name: header.FlashName; idk: block.FlashDataInfo_Idk; segment: FlashSegment}
     }
 
     FolderDialog
@@ -94,16 +97,21 @@ ColumnLayout
 
         onAccepted: {
             console.log("You chose: " + export_dialog.folder)
-            block.exportSegments(export_dialog.folder);
-            //FlashSegment.saveToFile(FlashSegment.SegmentName+"_"+idk+".segment");
-            //loadCFF(fileDialog.currentFile);
-            //Qt.quit()
+            ttip_id.show("Segments saved to: " +block.exportSegments(export_dialog.folder, header.FlashName), 2500);
         }
         onRejected: {
             console.log("Canceled")
             //Qt.quit()
         }
         //Component.onCompleted: visible = true
+    }
+
+    ToolTip
+    {
+        id: ttip_id
+        //parent: parent//btn_export_all
+        anchors.centerIn: parent
+        margins: 20
     }
 }
 

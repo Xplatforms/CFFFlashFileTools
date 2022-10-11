@@ -74,7 +74,7 @@ QByteArray CFFFlashSegment::readFlashSegment()
     return data;
 }
 
-void CFFFlashSegment::saveToFile(QString fpath)
+QString CFFFlashSegment::saveToFile(QString fpath)
 {
     if(fpath.startsWith(QStringLiteral("file:")))
     {
@@ -90,4 +90,6 @@ void CFFFlashSegment::saveToFile(QString fpath)
         seg_file.write(this->readFlashSegment());
         seg_file.close();
     }
+
+    return fpath;
 }

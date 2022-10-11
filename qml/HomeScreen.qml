@@ -26,7 +26,7 @@ Page {
         //selectMultiple: false
         nameFilters: [ "CFF Flash files (*.cff)", "All files (*)" ]
         onAccepted: {
-            console.log("You chose: " + fileDialog.currentFile)
+            console.log("You choose: " + fileDialog.currentFile)
             loadCFF(fileDialog.currentFile);
             //Qt.quit()
         }

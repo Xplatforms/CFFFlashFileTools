@@ -44,7 +44,7 @@ Page {
         {
             Label
             {
-                text: qsTr("Flash Name:")
+                text: qsTr("flash name:")
                 font: window.headerFont12
             }
             Label
@@ -73,13 +73,25 @@ Page {
         {
             Label
             {
-                text: qsTr("Flash Author:")
+                text: qsTr("author:")
                 font: window.headerFont12
 
             }
             Label
             {
                 text: flash_header.FileAuthor
+            }
+
+            Label
+            {
+                Layout.leftMargin: 10
+                text: qsTr("creation date:")
+                font: window.headerFont12
+
+            }
+            Label
+            {
+                text: flash_header.FileCreationTime
             }
         }
 
@@ -107,7 +119,7 @@ Page {
                     Layout.fillWidth: true
                     //anchors.fill: parent
                     model: blocks_model
-                    delegate: FlashDataBlockDelegate{block: FlashDataBlock; width: parent.width}
+                    delegate: FlashDataBlockDelegate{header: flash_header; block: FlashDataBlock; width: parent.width}
                 }
         }
 

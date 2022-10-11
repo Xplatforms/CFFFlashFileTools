@@ -21,6 +21,7 @@ public:
 
     Q_PROPERTY(QString FlashName READ FlashName WRITE setFlashName NOTIFY FlashNameChanged);
     Q_PROPERTY(QString FileAuthor READ FileAuthor WRITE setFileAuthor NOTIFY FileAuthorChanged);
+    Q_PROPERTY(QString FileCreationTime READ FileCreationTime WRITE setFileCreationTime NOTIFY FileCreationTimeChanged);
 
     Q_PROPERTY(int32_t CTFHeaderTable READ CTFHeaderTable NOTIFY CTFHeaderTableChanged);
     Q_PROPERTY(int32_t CffHeaderSize READ CffHeaderSize NOTIFY CffHeaderSizeChanged);
@@ -37,9 +38,11 @@ public:
     long BaseAddress(){return this->m_BaseAddress;}
     QString FlashName(){return this->m_FlashName;}
     QString FileAuthor(){return this->m_FileAuthor;}
+    QString FileCreationTime();
 
     void setFlashName(QString data){this->m_FlashName = data;}
     void setFileAuthor(QString data){this->m_FileAuthor = data;}
+    void setFileCreationTime(QString data){this->m_FileCreationTime = data;}
 
 
 private:
@@ -54,6 +57,7 @@ signals:
     void BaseAddressChanged();
     void FileAuthorChanged();
     void FlashNameChanged();
+    void FileCreationTimeChanged();
 
 private:
     QFile * m_cff_file;

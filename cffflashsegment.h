@@ -22,7 +22,7 @@ public:
     Q_PROPERTY(long BaseAddress READ BaseAddress WRITE setBaseAddress NOTIFY BaseAddressChanged);
 
     Q_INVOKABLE QByteArray readFlashSegment();    
-    Q_INVOKABLE void saveToFile(QString fpath);
+    Q_INVOKABLE QString saveToFile(QString fpath);
 
     QString SegmentName(){return this->m_SegmentName;}
     uint32_t FromAdress(){return this->m_FromAdress;}
