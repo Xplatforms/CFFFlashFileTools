@@ -18,6 +18,10 @@ int main(int argc, char *argv[])
 
     QApplication app(argc, argv);
 
+    app.setApplicationName("CFFFlashFileTools");
+    app.setApplicationVersion("0.1_alpha");
+    app.setOrganizationName("xplatforms");
+
     qRegisterMetaType<uint32_t>("uint32_t");
     qmlRegisterType<CFFFlashContainer>("xplatforms.cffflashcontainer.container", 1, 0, "CFFFlashContainer");
     qmlRegisterType<CFFFlashHeader>("xplatforms.cffflashcontainer.flashheader", 1, 0, "CFFFlashHeader");
