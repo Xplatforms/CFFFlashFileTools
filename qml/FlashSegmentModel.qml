@@ -10,7 +10,8 @@ import xplatforms.cffflashcontainer.flashsegmentmodel 1.0
 
 ColumnLayout
 {
-    property string idk
+    property string flash_name;
+    property string idk;
     property CFFFlashSegment segment;
 
     width: parent.width
@@ -25,7 +26,7 @@ ColumnLayout
         }
         Label
         {
-            text: "FromAdress "
+            text: "Address: "
         }
         Label
         {
@@ -33,7 +34,7 @@ ColumnLayout
         }
         Label
         {
-            text: "SegmentLength "
+            text: "Length (byte): "
         }
         Label
         {
@@ -69,7 +70,7 @@ ColumnLayout
 
         onAccepted: {
             console.log("You chose: " + file_save_dialog.folder)
-            segment.saveToFile(file_save_dialog.folder+"/"+segment.SegmentName+"_"+idk+".segment");
+            ttip_id.show("Segment saved to: " +segment.saveToFile(file_save_dialog.folder+"/"+flash_name+"_"+idk+"_"+segment.SegmentName+".segment"), 2500);
             //loadCFF(fileDialog.currentFile);
             //Qt.quit()
         }
@@ -78,6 +79,14 @@ ColumnLayout
             //Qt.quit()
         }
         //Component.onCompleted: visible = true
+    }
+
+    ToolTip
+    {
+        id: ttip_id
+        //parent: parent//btn_export_all
+        anchors.centerIn: parent
+        margins: 20
     }
 
 }

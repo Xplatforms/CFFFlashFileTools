@@ -51,7 +51,7 @@ void CFFFlashHeader::readFlash()
 
 
     this->setFileAuthor(CFFUtils::ReadBitflagString(bitFlags, this->m_cff_file, this->m_BaseAddress));
-    this->m_FileCreationTime = CFFUtils::ReadBitflagString(bitFlags, this->m_cff_file, this->m_BaseAddress);
+    this->setFileCreationTime(CFFUtils::ReadBitflagString(bitFlags, this->m_cff_file, this->m_BaseAddress));
     this->m_AuthoringToolVersion = CFFUtils::ReadBitflagString(bitFlags, this->m_cff_file, this->m_BaseAddress);
     this->m_FTRAFOVersionString = CFFUtils::ReadBitflagString(bitFlags, this->m_cff_file, this->m_BaseAddress);
 
@@ -134,4 +134,9 @@ void CFFFlashHeader::updateModel(CFFFlashDataBlocksModel * model)
 {
     qDbg() << "update blocks model!";
     model->addFlashDataBlocks(this->m_flash_data_blocks);
+}
+
+QString CFFFlashHeader::FileCreationTime()
+{
+    return QDateTime::fromString(this->m_FileCreationTime, Qt::ISODateWithMs).toString("dd.MM.yyyy hh:mm:ss");
 }

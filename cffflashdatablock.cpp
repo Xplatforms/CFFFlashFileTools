@@ -111,6 +111,7 @@ void CFFFlashDataBlock::readCFFData(QFile * cff, long baseAddress)
     qDbg() << "BlockLength " << this->BlockLength();
     qDbg() << "FlashData " << this->FlashData();
     qDbg() << "FileName " << this->FileName();
+    qDbg() << "LongName " << this->LongName();
 
 }
 
@@ -120,7 +121,7 @@ void CFFFlashDataBlock::updateModel(CFFFlashSegmentModel * model)
     model->addFlashSegments(this->m_FlashSegments);
 }
 
-void CFFFlashDataBlock::exportSegments(QString fpath)
+QString CFFFlashDataBlock::exportSegments(QString fpath, QString prefix)
 {
     if(fpath.startsWith(QStringLiteral("file:")))
     {
@@ -135,12 +136,14 @@ void CFFFlashDataBlock::exportSegments(QString fpath)
 
     foreach(auto segment, this->FlashSegments())
     {
-        qDbg() << "Segment: " << fpath+this->FlashDataInfo_Idk()+QLatin1String("_")+segment->SegmentName()+".segment";
-        QFile seg_file(fpath+this->FlashDataInfo_Idk()+QLatin1String("_")+segment->SegmentName()+".segment");
+        qDbg() << "Segment: " << fpath+prefix+"_"+this->FlashDataInfo_Idk()+QLatin1String("_")+segment->SegmentName()+".segment";
+        QFile seg_file(fpath+prefix+"_"+this->FlashDataInfo_Idk()+QLatin1String("_")+segment->SegmentName()+".segment");
         if(seg_file.open(QIODevice::WriteOnly))
         {
             seg_file.write(segment->readFlashSegment());
             seg_file.close();
         }
     }
+
+    return fpath;
 }

@@ -50,4 +50,5 @@ void CFFFlashDescriptionHeader::readCFFData(QFile * cff, long baseAddress)
     qDbg() << this->BaseAddress();
     qDbg() << this->Qualifier();
     qDbg() << this->FlashAreaName();
+    qDbg() << UniqueObjectID;
 }
