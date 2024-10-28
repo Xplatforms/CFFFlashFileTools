@@ -47,8 +47,9 @@ void CFFFlashDescriptionHeader::readCFFData(QFile * cff, long baseAddress)
     int32_t unkc = ReadBitflag4Byte(unkc, flashBitFlags, cff);
     this->setunkc(unkc);
 
-    qDbg() << this->BaseAddress();
-    qDbg() << this->Qualifier();
-    qDbg() << this->FlashAreaName();
-    qDbg() << UniqueObjectID;
+    qDbg() << "BaseAddress: " << this->BaseAddress();
+    qDbg() << "Qualifier: " << this->Qualifier();
+    qDbg() << "FlashAreaName: " << this->FlashAreaName();
+    qDbgVar(NumberOfUploads);
+    qDbgVar(UniqueObjectID);
 }
