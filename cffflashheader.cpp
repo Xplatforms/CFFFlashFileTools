@@ -11,7 +11,6 @@ CFFFlashHeader::CFFFlashHeader(QObject *parent) : QObject(parent)
 
 }
 
-
 CFFFlashHeader * CFFFlashHeader::readFlashHeader(QFile * cff, QObject * parent)
 {
     auto cff_header = new CFFFlashHeader(parent);
@@ -20,8 +19,6 @@ CFFFlashHeader * CFFFlashHeader::readFlashHeader(QFile * cff, QObject * parent)
 
     return cff_header;
 }
-
-
 
 void CFFFlashHeader::readFlash()
 {
@@ -33,22 +30,17 @@ void CFFFlashHeader::readFlash()
 
     this->m_BaseAddress = this->m_cff_file->pos(); emit BaseAddressChanged();
 
-
     ulong bitFlags = 0;
     this->m_cff_file->read((char*)&bitFlags, 4);
-
 
     ushort tmp = 0;
     this->m_cff_file->read((char*)&tmp, 2);
 
-
     this->setFlashName(CFFUtils::ReadBitflagString(bitFlags, this->m_cff_file, this->m_BaseAddress));
     this->m_FlashGenerationParams = CFFUtils::ReadBitflagString(bitFlags, this->m_cff_file, this->m_BaseAddress);
 
-
     int32_t Unk3 = ReadBitflag4Byte(Unk3, bitFlags, this->m_cff_file);
     int32_t Unk4 = ReadBitflag4Byte(Unk4, bitFlags, this->m_cff_file);
-
 
     this->setFileAuthor(CFFUtils::ReadBitflagString(bitFlags, this->m_cff_file, this->m_BaseAddress));
     this->setFileCreationTime(CFFUtils::ReadBitflagString(bitFlags, this->m_cff_file, this->m_BaseAddress));
